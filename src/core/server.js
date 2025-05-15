@@ -1,7 +1,7 @@
 // src/core/server.js
 import express from 'express';
 import bybitRoutes from '../bybit/bybit-routes.js';
-
+import trading212Routes from '../trading212/trading212-routes.js';
 /**
  * Create Express server with all necessary middleware and routes
  * @returns {express.Application} Express application
@@ -30,6 +30,7 @@ export function createServer() {
   
   // API Routes
   app.use('/api/bybit', bybitRoutes);
+  app.use('/api/trading212', trading212Routes);
   
   // Basic error handling middleware
   app.use((err, req, res, next) => {
