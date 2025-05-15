@@ -1,0 +1,49 @@
+# In PowerShell, in your project root (C:\GYF-backend)
+@"
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment variables (contains API keys - IMPORTANT!)
+.env
+.env.*
+!.env.example
+
+# Logs - but let's keep the log directory structure
+logs/*
+!logs/.gitkeep
+*.log
+npm-debug.log*
+
+# Database files
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+
+# Runtime data
+.DS_Store
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Frontend build artifacts
+dist/
+build/
+public/build/
+.cache/
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Backup files
+backup/
+"@ | Out-File -FilePath .gitignore -Encoding utf8
