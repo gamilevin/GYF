@@ -1,5 +1,4 @@
-// In trading212-routes.js, modify the file as follows:
-
+// src/trading212/trading212-routes.js
 import express from 'express';
 import {
   getAccountsHandler,
@@ -8,7 +7,7 @@ import {
   getAccountValueHandler,
   getAllAccountsValueHandler
 } from './trading212-controller.js';
-import { testApiConnection } from './trading212-api.js'; // Add this import
+import { testApiConnection, exploreAllEndpoints } from './trading212-api.js';
 
 const router = express.Router();
 
@@ -19,12 +18,26 @@ router.get('/account', getAccountInfoHandler);
 router.get('/value', getAccountValueHandler);
 router.get('/all', getAllAccountsValueHandler);
 
-// Add test endpoint
+// Test endpoint
 router.get('/test', async (req, res) => {
   try {
     const accountId = parseInt(req.query.accountId) || 1;
     const result = await testApiConnection(accountId);
     res.json(result);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Explore all available endpoints
+router.get('/explore', async (req, res) => {
+  try {
+    const accountId = parseInt(req.query.accountId) || 1;
+    const results = await exploreAllEndpoints(accountId);
+    res.json(results);
   } catch (error) {
     res.status(500).json({
       success: false,
